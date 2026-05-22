@@ -77,11 +77,11 @@ flows:
     onboardingUrl: https://www.typescriptlang.org/download
     os: [windows]
     windows:
-      install: Workloads/typescript/install.ps1
-      configuration: Workloads/typescript/configuration.winget
-      build: tsc tests/typescript/hello.ts
-      run: node tests/typescript/hello.js
-      expected: tests/typescript/expected.txt
+      install: src/Workloads/typescript/install.ps1
+      configuration: src/Workloads/typescript/configuration.winget
+      build: tsc src/tests/typescript/hello.ts
+      run: node src/tests/typescript/hello.js
+      expected: src/tests/typescript/expected.txt
       version: "node --version; tsc --version"
 
   - id: php
@@ -93,11 +93,11 @@ flows:
     onboardingUrl: https://www.php.net/manual/en/install.windows.php
     os: [windows]
     windows:
-      install: Workloads/php/install.ps1
-      configuration: Workloads/php/configuration.winget
+      install: src/Workloads/php/install.ps1
+      configuration: src/Workloads/php/configuration.winget
       build: ""
-      run: php tests/php/hello.php
-      expected: tests/php/expected.txt
+      run: php src/tests/php/hello.php
+      expected: src/tests/php/expected.txt
       version: "php --version"
 
   - id: winforms
