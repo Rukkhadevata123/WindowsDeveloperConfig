@@ -134,3 +134,5 @@ This repo carries **two parallel copies** of every flow:
 ## Contributing
 
 For repository layout, CI, and instructions for adding or validating flows, see [`src/docs/development.md`](./src/docs/development.md).
+
+The single source of truth for every flow (paths, build and run commands, ids, language metadata) is [`src/manifest.yml`](./src/manifest.yml). The Command Palette extension, the CI harness, and the per-flow shims all read from it - keep it in sync when adding or renaming a flow.
