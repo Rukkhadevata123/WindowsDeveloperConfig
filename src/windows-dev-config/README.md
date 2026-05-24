@@ -1,4 +1,4 @@
-# Calm OS
+# Dev Configuration
 
 A WinGet Configuration (DSC) file that sets up a clean, lightweight, distraction-free developer workstation. The goal is a PC state that devs actually love using: no clutter, no noise, just the tools and settings that matter.
 
@@ -66,7 +66,7 @@ The configuration is idempotent, so it is safe to re-run after reboot or at any 
 
 - **10 apps** via winget (PowerShell 7, Git, GitHub CLI, VS Code, .NET SDK 10, Python 3.13, UV, Node.js, plus optional Oh My Posh and PowerToys).
 - **WSL + Ubuntu**, installed via 3 transitional script resources that bracket a reboot (Phase 2/3/4 below).
-- **~24 registry settings** for theme, Explorer, Taskbar, Search, Start, Edge, Notifications, Sudo, Recall, Click To Do, and the Widget service.
+- **~21 registry settings** for theme, Explorer, Taskbar, Search, Start, Edge, Sudo, and the Widget service.
 - **2 script resources** beyond the WSL phases: an elevation gate that re-launches winget as admin if needed, and a Windows Terminal post-install that sets PowerShell 7 as the default profile.
 
 ---
@@ -145,14 +145,11 @@ All entries below are `Microsoft.Windows/Registry`.
 |------|----------------|-------|
 | Web search suggestions off | `HKCU\...\Policies\Explorer\DisableSearchBoxSuggestions` | DWord `1` |
 | Start menu recommendations off | `HKCU\...\Advanced\Start_Layout` | DWord `1` |
-| Do Not Disturb (toasts off) | `HKCU\...\Notifications\Settings\NOC_GLOBAL_SETTING_TOASTS_ENABLED` | DWord `0` |
 
 ### Services and features
 
 | Item | Hive\Key\Value | Value |
 |------|----------------|-------|
-| Click To Do off | `HKCU\...\ClickToDoAndScreenCapture\Enabled` | DWord `0` |
-| Recall off | `HKCU\...\Recall\Enabled` | DWord `0` |
 | Widget service off (HKLM policy) | `HKLM\SOFTWARE\Policies\Microsoft\Dsh\AllowNewsAndInterests` | DWord `0` |
 | PowerToys AOT notifications off | `HKCU\...\Notifications\Settings\PowerToys\Enabled` | DWord `0` |
 
