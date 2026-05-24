@@ -247,19 +247,6 @@ resources:
     description: Open File Explorer to This PC
 
 - type: Microsoft.Windows/Registry
-  name: AccountInsights
-  dependsOn:
-  - ElevationCheck
-  properties:
-    keyPath: HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SystemSettings\AccountNotifications
-    valueName: EnableAccountNotifications
-    valueData:
-      DWord: 0
-    _exist: true
-  metadata:
-    description: Disable account-based insights
-
-- type: Microsoft.Windows/Registry
   name: FrequentFolders
   dependsOn:
   - ElevationCheck
@@ -433,32 +420,6 @@ resources:
 # =============================================================================
 # Services and Features
 # =============================================================================
-
-- type: Microsoft.Windows/Registry
-  name: ClickToDo
-  dependsOn:
-  - ElevationCheck
-  properties:
-    keyPath: HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ClickToDoAndScreenCapture
-    valueName: Enabled
-    valueData:
-      DWord: 0
-    _exist: true
-  metadata:
-    description: Disable Click To Do
-
-- type: Microsoft.Windows/Registry
-  name: RecallOff
-  dependsOn:
-  - ElevationCheck
-  properties:
-    keyPath: HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Recall
-    valueName: Enabled
-    valueData:
-      DWord: 0
-    _exist: true
-  metadata:
-    description: Disable Recall
 
 - type: Microsoft.Windows/Registry
   name: WidgetServiceOff
