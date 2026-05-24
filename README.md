@@ -14,8 +14,6 @@
 </p>
 
 <h3 align="center">
-  <a href="#-pick-your-setup">Pick your setup</a>
-  <span> · </span>
   <a href="#%EF%B8%8F-windows-dev-config">Windows Dev Config</a>
   <span> · </span>
   <a href="#-wsl-comfort">WSL Comfort</a>
@@ -23,8 +21,6 @@
   <a href="#-single-language-workloads">Workloads</a>
   <span> · </span>
   <a href="#-troubleshooting">Troubleshooting</a>
-  <span> · </span>
-  <a href="#-contributing">Contributing</a>
 </h3>
 
 ---
@@ -46,6 +42,8 @@ winget configure --enable
 ```
 
 If that fails or `winget configure` still acts like it doesn't exist, see [Troubleshooting](#-troubleshooting).
+
+<br/>
 
 ## 🖥️ Windows Dev Config
 
@@ -70,6 +68,8 @@ winget configure -f .\windows-dev-config\dev-config.winget --accept-configuratio
 </details>
 
 Full details: [`windows-dev-config/README.md`](./windows-dev-config/README.md).
+
+<br/>
 
 ## 🐧 WSL Comfort
 
@@ -98,6 +98,8 @@ Interactive by default. Use `-NonInteractive` for unattended runs; the bootstrap
 
 Full details: [`wsl-comfort/readme.md`](./wsl-comfort/readme.md).
 
+<br/>
+
 ## 🧪 Single-language workloads
 
 Just want one toolchain? Pick a row. Each flow ships a `configuration.winget` file plus a matching `install.ps1` shim that applies it and refreshes PATH in the current session.
@@ -122,11 +124,15 @@ Want the PATH refresh in your current shell? Use the matching shim instead of ca
 
 > **Heads up:** WinForms and WinUI 3 pull down several gigabytes of Visual Studio components. Fine on a real workstation, painful on a small VM.
 
+<br/>
+
 ## 🎨 Command Palette extension
 
 A [PowerToys Command Palette](https://learn.microsoft.com/en-us/windows/powertoys/command-palette/overview) extension lives under [`src/future/cmdpal/`](./src/future/cmdpal/). It reads the same flow list as the rest of the repo and surfaces every flow as a launchable entry, so you don't have to remember which `configuration.winget` to point `winget` at.
 
 See [`src/future/cmdpal/README.md`](./src/future/cmdpal/README.md) for build and install instructions.
+
+<br/>
 
 ## 🩺 Troubleshooting
 
@@ -158,9 +164,13 @@ Run `.\wsl-comfort\install.ps1` on the Windows side instead. It installs WSL fir
 
 </details>
 
+<br/>
+
 ## 🐛 Reporting issues
 
 Hit a bug, a stale doc, or a flow that fails on your machine? Open an issue at [github.com/microsoft/WindowsDeveloperConfig/issues](https://github.com/microsoft/WindowsDeveloperConfig/issues). Include your Windows build (`winver`), the exact command you ran, and the failing output. That makes everything faster.
+
+<br/>
 
 ## ❤️ Contributing
 
