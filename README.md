@@ -35,7 +35,7 @@ Three different things live in this repo. Pick the one that matches what you act
 | A nicer shell inside WSL (zsh/bash, Starship, modern CLI bits), plus a themed Windows Terminal profile. Interactive. | [WSL Comfort](#-wsl-comfort) |
 | Just one language toolchain (Node, Python, .NET, Rust, Go, Java, PHP, WinForms, WinUI 3). | [Workloads](#-single-language-workloads) |
 
-All of them use `winget configure`. If you've never used it before, turn it on once:
+Most of them use `winget configure`. If you've never used it before, turn it on once:
 
 ```powershell
 winget configure --enable
