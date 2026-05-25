@@ -75,7 +75,7 @@ Full details: [`windows-dev-config/README.md`](./windows-dev-config/README.md).
 
 *aka Comfort Shell. An interactive setup for a nicer Windows + WSL shell environment.*
 
-Different beast from Windows Dev Config. WSL Comfort doesn't touch your Windows settings, doesn't reboot, and asks you what you actually want as it goes. The Windows side handles WSL, the distro, the JetBrainsMono Nerd Font, and a themed Windows Terminal profile. The Linux side runs inside the distro and configures the shell itself.
+WSL Comfort is a different beast. Beyond interactive and non-interactive, you can actually pick and choose options. The Windows side handles WSL, the distro, the JetBrainsMono Nerd Font, and a themed Windows Terminal profile. The Linux side runs inside the distro and configures the shell itself.
 
 ```powershell
 .\wsl-comfort\install.ps1
