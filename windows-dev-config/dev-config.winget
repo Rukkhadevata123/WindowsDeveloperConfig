@@ -325,16 +325,6 @@ resources:
     valueData:
       DWord: 0
 
-#- type: Microsoft.Windows/Registry
-#  name: SpotlightOff
-#  dependsOn:
-#  - ElevationCheck
-#  properties:
-#    keyPath: HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager
-#    valueName: RotatingLockScreenOverlayEnabled
-#    valueData:
-#      DWord: 0
-
 # =============================================================================
 # Taskbar
 # =============================================================================
@@ -352,20 +342,6 @@ resources:
       DWord: 0
   metadata:
     description: Hide Widgets button on the taskbar
-
-# Hide Search box (replaces Microsoft.Windows.Developer/Taskbar
-# SearchboxMode:Hide). 0 = hidden.
-#- type: Microsoft.Windows/Registry
-#  name: TaskbarHideSearch
-#  dependsOn:
-#  - ElevationCheck
-#  properties:
-#    keyPath: HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search
-#    valueName: SearchboxTaskbarMode
-#    valueData:
-#      DWord: 0
-#  metadata:
-#    description: Hide Search box on the taskbar
 
 - type: Microsoft.Windows/Registry
   name: BluetoothOff
@@ -403,6 +379,19 @@ resources:
     _exist: true
   metadata:
     description: Disable web search in Start/Search
+
+- type: Microsoft.Windows/Registry
+  name: SearchHightlightOff
+  dependsOn:
+  - ElevationCheck
+  properties:
+    keyPath: HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SearchSettings
+    valueName: IsDynamicSearchBoxEnabled
+    valueData:
+      DWord: 0
+    _exist: true
+  metadata:
+    description: Disable Show search highlights
 
 - type: Microsoft.Windows/Registry
   name: StartRecommendations
