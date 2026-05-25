@@ -88,7 +88,7 @@ Interactive by default. Use `-NonInteractive` for unattended runs; the bootstrap
 
 - Your choice of shell: **zsh** or **bash**.
 - Optional **Starship** prompt.
-- Optional modern CLI tools: `fzf`, `rg`, `fd`, `bat`, `eza`, `zoxide`.
+- Optional modern CLI tools: `fzf`, `rg`, `fd`, `bat`, `eza`, `zoxide`, `jq`.
 - Optional clipboard and `open` shims (`pbcopy`, `pbpaste`, `open`).
 - Optional **Homebrew**.
 - Optional Git defaults.
