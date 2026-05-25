@@ -81,9 +81,7 @@ resources:
           $Version = '2407.24'
           $WantedFonts = @(
               'CascadiaCodeNF.ttf',
-              'CascadiaCodeNFItalic.ttf',
-              'CascadiaMonoNF.ttf',
-              'CascadiaMonoNFItalic.ttf'
+              'CascadiaMonoNF.ttf'
           )
 
           $zipUrl  = "https://github.com/microsoft/cascadia-code/releases/download/v$Version/CascadiaCode-$Version.zip"
