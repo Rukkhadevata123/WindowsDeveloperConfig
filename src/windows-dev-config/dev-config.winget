@@ -440,10 +440,11 @@ resources:
     valueName: NOC_GLOBAL_SETTING_TOASTS_ENABLED
     valueData:
       DWord: 0
+
 - type: Microsoft.DSC.Transitional/RunCommandOnSet
   name: DoNotDisturbCloudStoreBlob
   dependsOn:
-  - DoNotDisturbToasts
+  - DoNotDisturb
   properties:
     executable: powershell.exe
     arguments:
