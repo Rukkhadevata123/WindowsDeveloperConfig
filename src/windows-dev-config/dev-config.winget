@@ -441,29 +441,6 @@ resources:
     valueData:
       DWord: 0
 
-- type: Microsoft.DSC.Transitional/RunCommandOnSet
-  name: DoNotDisturbCloudStoreBlob
-  dependsOn:
-  - DoNotDisturb
-  properties:
-    executable: powershell.exe
-    arguments:
-    - -NoProfile
-    - -ExecutionPolicy
-    - Bypass
-    - -Command
-    - |
-      $p = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount\$$windows.data.notifications.quiethourssettings\Current'
-      if (Test-Path $p) {
-        $d = (Get-ItemProperty -Path $p -Name Data).Data
-        if ($d.Length -gt 0x32 -and $d[0x32] -ne 1) {
-          $d[0x32] = 1
-          Set-ItemProperty -Path $p -Name Data -Value $d
-        }
-      }
-  metadata:
-    description: Flip the DND byte at offset 0x32 in the CloudStore quiethourssettings blob so the Settings/bell-icon toggle reflects 'On'
-
 # =============================================================================
 # Taskbar
 # =============================================================================
