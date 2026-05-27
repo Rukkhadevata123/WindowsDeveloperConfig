@@ -500,13 +500,26 @@ function Install-NerdFont {
 
     $Version     = '2407.24'
     $WantedFonts = @('CascadiaCodeNF.ttf', 'CascadiaMonoNF.ttf')
-    $zipUrl      = "https://github.com/microsoft/cascadia-code/releases/download/v$Version/CascadiaCode-$Version.zip"
-    $workDir     = Join-Path $env:TEMP "CascadiaCode-$Version"
-    $zipPath     = Join-Path $workDir 'CascadiaCode.zip'
-    New-Item -ItemType Directory -Path $workDir -Force | Out-Null
 
-    $fontsDir = Join-Path $env:LOCALAPPDATA 'Microsoft\Windows\Fonts'
-    $regPath  = 'HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts'
+    # Skip if all font files and registry entries are already present
+    $fontsDir  = Join-Path $env:LOCALAPPDATA 'Microsoft\Windows\Fonts'
+    $regPath   = 'HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts'
+    $regValues = @(
+        (Get-ItemProperty $regPath -EA SilentlyContinue).PSObject.Properties |
+        Where-Object Name -notin 'PSPath','PSParentPath','PSChildName','PSDrive','PSProvider' |
+        Select-Object -ExpandProperty Value
+    )
+    $filesOk = -not ($WantedFonts | Where-Object { -not (Test-Path (Join-Path $fontsDir $_)) })
+    $regOk   = -not ($WantedFonts | Where-Object { $fn = $_; -not ($regValues | Where-Object { $_ -like "*\$fn" }) })
+    if ($filesOk -and $regOk) {
+        Write-Host "Nerd fonts already installed; skipping."
+        return
+    }
+
+    $zipUrl  = "https://github.com/microsoft/cascadia-code/releases/download/v$Version/CascadiaCode-$Version.zip"
+    $workDir = Join-Path $env:TEMP "CascadiaCode-$Version"
+    $zipPath = Join-Path $workDir 'CascadiaCode.zip'
+    New-Item -ItemType Directory -Path $workDir -Force | Out-Null
     New-Item -ItemType Directory -Path $fontsDir -Force | Out-Null
 
     Write-Host "Downloading $zipUrl ..."
