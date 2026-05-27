@@ -25,6 +25,8 @@
 
 ---
 
+Go from a fresh Windows install to a fully configured dev box in one command. These declarative, CI-tested configs set up your tools, settings, and shells the same way every time — so any machine can be your machine in minutes.
+
 ## 🎯 Pick your setup
 
 Three developer setups live in this repo. Pick the one that matches what you want:
@@ -128,7 +130,7 @@ Want the PATH refresh in your current shell? Use the matching shim instead of ca
 
 ## 🎨 Command Palette extension
 
-A [PowerToys Command Palette](https://learn.microsoft.com/en-us/windows/powertoys/command-palette/overview) extension lives under [`src/future/cmdpal/`](./src/future/cmdpal/). It reads the same setup list as the rest of the repo and surfaces every setup as a launchable entry, so you don't have to remember which `configuration.winget` file to run.
+A [PowerToys Command Palette](https://learn.microsoft.com/windows/powertoys/command-palette/overview) extension lives under [`src/future/cmdpal/`](./src/future/cmdpal/). It reads the same flow list as the rest of the repo and surfaces every flow as a launchable entry, so you don't have to remember which `configuration.winget` to point `winget` at.
 
 See [`src/future/cmdpal/README.md`](./src/future/cmdpal/README.md) for build and install instructions.
 
