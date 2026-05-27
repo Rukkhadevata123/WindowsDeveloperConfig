@@ -46,7 +46,6 @@ if ($ResumeEncodedArgs) {
 }
 
 $script:CurrentStep = 0
-$script:TotalSteps  = 5
 
 function Set-ConsoleTitle {
     param([string]$Title)
@@ -92,8 +91,9 @@ function Read-YesNo {
     }
 }
 
-function Get-WslSupportedDistros {
-    # Installed Ubuntu distros on this machine. `wsl -l -q` emits UTF-16LE with NUL bytes.
+function Get-InstalledWslDistros {
+    # Returns the names of Ubuntu distros currently installed in WSL.
+    # `wsl -l -q` emits UTF-16LE with NUL bytes; strip them before filtering.
     $raw = (& wsl.exe --list --quiet) 2>$null
     if ($LASTEXITCODE -ne 0 -or -not $raw) { return @() }
     return @($raw |
@@ -330,7 +330,7 @@ function Install-NewDistro {
         $exitCode = Invoke-NativeConsole -FilePath 'wsl.exe' -ArgumentList @('--install', '-d', $Name, '--no-launch')
         Write-Host ''
 
-        if ((@(Get-WslSupportedDistros)) -contains $Name) { return $Name }
+        if ((@(Get-InstalledWslDistros)) -contains $Name) { return $Name }
 
         if ($attempt -lt $maxAttempts) {
             $delay = if ($attempt -eq 1) { 5 } else { 15 }
@@ -400,7 +400,7 @@ function Select-ExistingOrInstallDistro {
 }
 
 function Resolve-Distro {
-    $existing = @(Get-WslSupportedDistros)
+    $existing = @(Get-InstalledWslDistros)
 
     if ($Distro) {
         if (-not ($Distro -like 'Ubuntu*')) {
@@ -599,7 +599,7 @@ function Install-TerminalProfile {
                 cursorShape     = 'bar'
                 hidden          = $false
                 font            = @{
-                    face = 'JetBrainsMono Nerd Font'
+                    face = 'Cascadia Mono NF'
                     size = 13
                 }
             }
@@ -666,6 +666,8 @@ function Install-TerminalProfile {
 }
 
 # --- Main flow ---------------------------------------------------------------
+# Steps: WSL platform + distro + bootstrap + nerd fonts + WT profile
+$script:TotalSteps = 5
 
 Assert-WindowsTerminal
 Clear-ResumeAfterReboot
