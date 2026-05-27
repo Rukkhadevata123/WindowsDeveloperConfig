@@ -9,7 +9,7 @@ metadata:
 resources:
 
 # ---------------------------------------------------------------------------
-# WSL Phase 0 — Elevation check (runs on initial invoke AND post-reboot resume)
+# Phase 0 — Elevation check (runs on initial invoke AND post-reboot resume)
 # ---------------------------------------------------------------------------
 
 - name: ElevationCheck
@@ -136,6 +136,13 @@ resources:
       $ProgressPreference = 'SilentlyContinue'
       Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath -UseBasicParsing
 
+      $expectedHash = 'E67A68EE3386DB63F48B9054BD196EA752BC6A4EBB4DF35ADCE6733DA50C8474'
+      $actualHash   = (Get-FileHash $zipPath -Algorithm SHA256).Hash
+      if ($actualHash -ne $expectedHash) {
+          Remove-Item $zipPath -Force
+          throw "Hash mismatch for CascadiaCode-$Version.zip: expected $expectedHash, got $actualHash"
+      }
+
       Add-Type -AssemblyName System.IO.Compression.FileSystem
       Add-Type -AssemblyName System.Drawing
 
@@ -227,7 +234,7 @@ resources:
       $json | ConvertTo-Json -Depth 32 | Set-Content $settingsPath -Encoding utf8
       Write-Host "Set font to '$fontFace'  (backup: $settingsPath.bak)"
   metadata:
-    description: Making Cascaida fonts default
+    description: Making Cascadia fonts default
 
 # =============================================================================
 # Set PowerShell 7 as the default Windows Terminal profile
@@ -859,26 +866,14 @@ resources:
 # =============================================================================
 # Include Oh My Posh init in PowerShell 7 profile
 # =============================================================================
-- type: Microsoft.DSC.Transitional/PowerShellScript
+- type: OhMyPosh/Shell
   name: ohMyPoshProfileSet
   dependsOn:
     - OhMyPosh
   properties:
-    getScript: |
-      $line = 'oh-my-posh init pwsh | Invoke-Expression'
-      $present = (Test-Path $PROFILE) -and (Select-String -Path $PROFILE -Pattern ([regex]::Escape($line)) -Quiet)
-      return @{ linePresent = [bool]$present }
-    testScript: |
-      $line = 'oh-my-posh init pwsh | Invoke-Expression'
-      if (-not (Test-Path $PROFILE)) { return $false }
-      return [bool](Select-String -Path $PROFILE -Pattern ([regex]::Escape($line)) -Quiet)
-    setScript: |
-      $line = 'oh-my-posh init pwsh | Invoke-Expression'
-      if (-not (Test-Path $PROFILE)) {
-          New-Item -Path $PROFILE -ItemType File -Force | Out-Null
-      }
-      Add-Content -Path $PROFILE -Value "`n$line"
-      Write-Host "Added oh-my-posh init to $PROFILE"
+    states:
+      - name: pwsh
+        command: oh-my-posh init pwsh
   metadata:
     description: Setup OhMyPosh in PowerShell 7
 

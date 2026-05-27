@@ -513,6 +513,13 @@ function Install-NerdFont {
     $ProgressPreference = 'SilentlyContinue'
     Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath -UseBasicParsing
 
+    $expectedHash = 'E67A68EE3386DB63F48B9054BD196EA752BC6A4EBB4DF35ADCE6733DA50C8474'
+    $actualHash   = (Get-FileHash $zipPath -Algorithm SHA256).Hash
+    if ($actualHash -ne $expectedHash) {
+        Remove-Item $zipPath -Force
+        throw "Hash mismatch for CascadiaCode-$Version.zip: expected $expectedHash, got $actualHash"
+    }
+
     Add-Type -AssemblyName System.IO.Compression.FileSystem
     Add-Type -AssemblyName System.Drawing
 
@@ -666,7 +673,7 @@ $preBootstrapUser = Get-WslDefaultUser -DistroName $Distro
 Step "Running Comfort Shell bootstrap in $Distro"
 Invoke-ComfortShellBootstrap -DistroName $Distro
 
-Step "Installing JetBrainsMono Nerd Font"
+Step "Installing Cascadia Code Nerd Fonts"
 Install-NerdFont
 
 Step "Installing Windows Terminal profile"
