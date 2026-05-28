@@ -41,20 +41,20 @@ extension.
 | PHP               | ✅ automated   | `PHP.PHP.8.5`                                                                           |
 | .NET              | ✅ automated   | `Microsoft.DotNet.SDK.10`                                                               |
 | Go                | ✅ automated   | `GoLang.Go` (rolling — winget publishes Go unversioned)                                 |
-| Java              | ✅ automated   | `Microsoft.OpenJDK.21`                                                                  |
+| Java              | ✅ automated   | `Microsoft.OpenJDK.25`                                                                  |
 | Rust              | ✅ automated   | `Rustlang.Rustup` (then `rustup default stable`)                                        |
 | Python            | ✅ automated   | `Python.Python.3.13`, `astral-sh.uv`                                                    |
 | WinForms          | 🙋 manual     | `Microsoft.DotNet.SDK.10` + the .NET desktop workload (multi-GB; manual to spare CI minutes) |
 | WinUI 3           | 🙋 manual     | `Microsoft.DotNet.SDK.10`, `Microsoft.VisualStudio.Community`, `Microsoft.WinAppCLI` + WinUI/Universal/ManagedDesktop VS workloads |
 | Calm OS           | 🙋 manual     | A full distraction-free workstation: apps + ~24 registry tweaks + WSL + Ubuntu (see [`windows-dev-config/README.md`](../windows-dev-config/README.md)) |
-| Comfort Shell     | 🙋 manual     | WSL distro + zsh/bash + starship + modern CLI bundle + JetBrainsMono Nerd Font + themed Windows Terminal profile (see [`wsl-comfort/readme.md`](../wsl-comfort/readme.md)) |
+| Comfort Shell     | 🙋 manual     | WSL distro + zsh/bash + starship + modern CLI bundle + Cascadia Code Nerd Font + themed Windows Terminal profile (see [`wsl-comfort/readme.md`](../wsl-comfort/readme.md)) |
 
 See [`manifest.yml`](../manifest.yml) for the canonical declarative
 list (paths, build/run commands, onboarding URLs).
 
 ## Command Palette extension
 
-A [PowerToys Command Palette](https://learn.microsoft.com/en-us/windows/powertoys/command-palette/overview)
+A [PowerToys Command Palette](https://learn.microsoft.com/windows/powertoys/command-palette/overview)
 extension lives under [`future/cmdpal/`](../future/cmdpal/). It reads the same
 `manifest.yml` as CI and lets you browse + launch any flow without remembering
 which `configuration.winget` to point `winget` at.

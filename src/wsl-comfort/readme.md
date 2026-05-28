@@ -1,6 +1,6 @@
 # WSL Comfort Shell 😎
 
-A two-part installer that turns a fresh Windows + WSL machine into a cozy, opinionated-but-configurable shell: an Ubuntu distro running zsh + starship + modern CLI tools, surfaced through a themed Windows Terminal profile in a Cascadia Code Mono Nerd Font. Every component is opt-in — pick the parts you want and skip the rest.
+A two-part installer that turns a fresh Windows + WSL machine into a cozy, opinionated-but-configurable shell: an Ubuntu distro running zsh + starship + modern CLI tools, surfaced through a themed Windows Terminal profile in a Cascadia Code Nerd Font. Every component is opt-in — pick the parts you want and skip the rest.
 
 The Windows half (`install.ps1`) handles WSL, the distro, the font, and the terminal profile. The Linux half (`comfort-shell-bootstrap.sh`) runs inside the distro and does all the shell customization. They are designed to be runnable independently — the bootstrap is a standalone script you can scp onto any Ubuntu host and run by itself.
 
@@ -225,3 +225,7 @@ This is what makes the Windows-side flow work on a freshly installed distro that
 | **CRLF in the bootstrap** | When the bootstrap is staged from Windows, the script `sed -i 's/\r$//'` inside WSL before executing. If you copy it manually, make sure your editor doesn't re-introduce CRLF. |
 | **NUL bytes in `/etc/wsl.conf`** | A known WSL bug occasionally writes NUL bytes into `/etc/wsl.conf`. `heal_wsl_issues` strips them; you may need to `wsl.exe --shutdown` afterward for the cleaned config to take effect. |
 | **Idempotency vs `--force`** | Re-runs preserve user edits to existing configs (e.g. `~/.config/starship.toml`). Pass `--force` to overwrite. The managed dotfile blocks are always replaced wholesale — edits inside the markers are lost. |
+
+## Inspired by
+
+This system was inspired by [Scott Hanselman's WSL Comfort shell](https://github.com/shanselman/MacLikeWSLComfortShell).
