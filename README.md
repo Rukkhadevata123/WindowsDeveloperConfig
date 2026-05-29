@@ -94,7 +94,7 @@ Interactive by default. Use `-NonInteractive` for unattended runs; the bootstrap
 - Optional clipboard and `open` shims (`pbcopy`, `pbpaste`, `open`).
 - Optional **Homebrew**.
 - Optional Git defaults.
-- A themed **Windows Terminal** profile using JetBrainsMono Nerd Font.
+- A themed **Windows Terminal** profile using Cascadia Code Nerd Font.
 
 </details>
 
