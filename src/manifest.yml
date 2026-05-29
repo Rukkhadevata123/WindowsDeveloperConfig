@@ -56,7 +56,9 @@
 #                   shows up in the CmdPal extension and in the CI summary
 #                   under a "manual" bucket.
 #   windows:        (object, required if "windows" in os)
-#     install:        path to PowerShell install shim (CI runs this)
+#     install:        path to PowerShell install shim
+#                     CI runs this from the `src/` directory, while CmdPal
+#                     assumes the extension's root is the repo root.
 #     configuration:  (optional) path to winget DSC configuration.winget the
 #                     extension applies via `winget configure`. Defaults to
 #                     "<dir of install>/configuration.winget" when omitted.
@@ -77,8 +79,8 @@ flows:
     onboardingUrl: https://www.typescriptlang.org/download
     os: [windows]
     windows:
-      install: src/Workloads/typescript/install.ps1
-      configuration: src/Workloads/typescript/configuration.winget
+      install: Workloads/typescript/install.ps1
+      configuration: Workloads/typescript/configuration.winget
       build: tsc src/tests/typescript/hello.ts
       run: node src/tests/typescript/hello.js
       expected: src/tests/typescript/expected.txt
@@ -93,8 +95,8 @@ flows:
     onboardingUrl: https://www.php.net/manual/en/install.windows.php
     os: [windows]
     windows:
-      install: src/Workloads/php/install.ps1
-      configuration: src/Workloads/php/configuration.winget
+      install: Workloads/php/install.ps1
+      configuration: Workloads/php/configuration.winget
       build: ""
       run: php src/tests/php/hello.php
       expected: src/tests/php/expected.txt
