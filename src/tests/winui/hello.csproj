@@ -32,6 +32,9 @@
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <WindowsPackageType>None</WindowsPackageType>
     <AppxGeneratePriEnabled>false</AppxGeneratePriEnabled>
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <SelfContained>true</SelfContained>
   </PropertyGroup>
 
   <ItemGroup>

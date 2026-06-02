@@ -105,6 +105,17 @@ resources:
       winget:
         securityContext: elevated
 
+  - type: Microsoft.WinGet/Package
+    name: WindowsAppRuntime
+    properties:
+      id: Microsoft.WindowsAppRuntime.1.6
+      source: winget
+      acceptAgreements: true
+    metadata:
+      description: Install the Windows App Runtime 1.6
+      winget:
+        securityContext: elevated
+
   - type: Microsoft.DSC.Transitional/RunCommandOnSet
     name: VSWorkloads
     dependsOn:
