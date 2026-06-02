@@ -78,6 +78,7 @@ resources:
       id: Microsoft.VisualStudio.Community
       source: winget
       acceptAgreements: true
+      version: 18.4.3
     metadata:
       description: Install Visual Studio 2026 Community
       winget:
