@@ -176,6 +176,19 @@ Run `.\wsl-comfort\install.ps1` on the Windows side instead. It installs WSL fir
 
 </details>
 
+<details>
+<summary><strong>WSL install fails with <code>wsl --install ... failed with exit code -1</code> (typically inside a VM)</strong></summary>
+
+If you're running Windows inside a virtual machine, the host needs **nested virtualization** enabled before WSL can install. For a Hyper-V host, run this from an elevated PowerShell session **on the host** (with the guest VM powered off):
+
+```powershell
+Set-VMProcessor -VMName <VM_NAME> -ExposeVirtualizationExtensions $true
+```
+
+Other hypervisors (VMware, VirtualBox, Parallels) have their own equivalent settings.
+
+</details>
+
 <br/>
 
 ## 🐛 Reporting issues

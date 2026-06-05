@@ -45,8 +45,18 @@ The flow is a single DSC document (`dev-config.winget`) that handles everything 
 - `winget` with the DSC v3 processor available (the file uses `Microsoft.WinGet/Package`, `Microsoft.Windows/Registry`, and `Microsoft.DSC.Transitional/*`).
 - Administrator rights — the `ElevationCheck` resource will auto-relaunch winget elevated via `Start-Process -Verb RunAs` if you started in an unelevated session, but you'll need to consent at the UAC prompt.
 - The repo on disk. `winget configure` reads a local file path, and the bootstrap is what installs Git, so on a fresh machine you'll either `git clone` (if Git is already installed) or download the repo as a ZIP from GitHub and extract it before running.
+- If running inside a virtual machine, **nested virtualization must be enabled on the host** before WSL can install. See the Usage callout below.
 
 ## Usage
+
+> [!IMPORTANT]
+> **Running inside a VM?** Nested virtualization must be enabled for WSL to install. For a Hyper-V host, run this from an elevated PowerShell session **on the host** (with the guest VM powered off):
+>
+> ```powershell
+> Set-VMProcessor -VMName <VM_NAME> -ExposeVirtualizationExtensions $true
+> ```
+>
+> Other hypervisors (VMware, VirtualBox, Parallels) have their own equivalent settings. Without this, the `InstallUbuntu` step fails with `wsl --install ... failed with exit code -1`.
 
 **Get the files first** (skip if you already have the repo locally):
 
